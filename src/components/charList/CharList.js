@@ -1,4 +1,6 @@
 import { Component } from 'react';
+import PropTypes from 'prop-types';
+
 import Spinner from '../spinner/Spinner';
 import ErrorMessage from '../errorMessage/ErrorMessage';
 import MarvelService from '../../services/MarvelService';
@@ -11,7 +13,7 @@ class CharList extends Component {
     loading: true,
     error: false,
     newItemLoading: false,
-    offset: 1557,
+    offset: 210,
     charEnded: false
   };
 
@@ -91,8 +93,9 @@ const View = ({ charList, props }) => {
     const clazz = active ? 'char__item char__item_selected' : 'char__item ';
     return (
       <li
+        tabIndex={0}
         key={id}
-        onClick={() => props.onCharSelected(id)}
+        onFocus={() => props.onCharSelected(id)}
         className={clazz}>
           <img
             src={thumbnail}
@@ -109,5 +112,9 @@ const View = ({ charList, props }) => {
     );
   });
 };
+
+CharList.propTypes = {
+  onCharSelected: PropTypes.func.isRequired
+}
 
 export default CharList;
