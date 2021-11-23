@@ -1,21 +1,21 @@
 {
   "files": {
-    "main.css": "/static/css/main.ccf38649.chunk.css",
-    "main.js": "/static/js/main.d4d5bd97.chunk.js",
-    "main.js.map": "/static/js/main.d4d5bd97.chunk.js.map",
-    "runtime-main.js": "/static/js/runtime-main.18ba9736.js",
-    "runtime-main.js.map": "/static/js/runtime-main.18ba9736.js.map",
-    "static/js/2.8d280945.chunk.js": "/static/js/2.8d280945.chunk.js",
-    "static/js/2.8d280945.chunk.js.map": "/static/js/2.8d280945.chunk.js.map",
-    "index.html": "/index.html",
-    "static/css/main.ccf38649.chunk.css.map": "/static/css/main.ccf38649.chunk.css.map",
-    "static/js/2.8d280945.chunk.js.LICENSE.txt": "/static/js/2.8d280945.chunk.js.LICENSE.txt",
-    "static/media/error.42292aa1.gif": "/static/media/error.42292aa1.gif",
-    "static/media/mjolnir.61f31e18.png": "/static/media/mjolnir.61f31e18.png",
-    "static/media/vision.067d4ae1.png": "/static/media/vision.067d4ae1.png"
+    "main.css": "/React-project-marvel/static/css/main.ccf38649.chunk.css",
+    "main.js": "/React-project-marvel/static/js/main.d4d5bd97.chunk.js",
+    "main.js.map": "/React-project-marvel/static/js/main.d4d5bd97.chunk.js.map",
+    "runtime-main.js": "/React-project-marvel/static/js/runtime-main.b3bfbc3d.js",
+    "runtime-main.js.map": "/React-project-marvel/static/js/runtime-main.b3bfbc3d.js.map",
+    "static/js/2.8d280945.chunk.js": "/React-project-marvel/static/js/2.8d280945.chunk.js",
+    "static/js/2.8d280945.chunk.js.map": "/React-project-marvel/static/js/2.8d280945.chunk.js.map",
+    "index.html": "/React-project-marvel/index.html",
+    "static/css/main.ccf38649.chunk.css.map": "/React-project-marvel/static/css/main.ccf38649.chunk.css.map",
+    "static/js/2.8d280945.chunk.js.LICENSE.txt": "/React-project-marvel/static/js/2.8d280945.chunk.js.LICENSE.txt",
+    "static/media/error.42292aa1.gif": "/React-project-marvel/static/media/error.42292aa1.gif",
+    "static/media/mjolnir.61f31e18.png": "/React-project-marvel/static/media/mjolnir.61f31e18.png",
+    "static/media/vision.067d4ae1.png": "/React-project-marvel/static/media/vision.067d4ae1.png"
   },
   "entrypoints": [
-    "static/js/runtime-main.18ba9736.js",
+    "static/js/runtime-main.b3bfbc3d.js",
     "static/js/2.8d280945.chunk.js",
     "static/css/main.ccf38649.chunk.css",
     "static/js/main.d4d5bd97.chunk.js"
