@@ -22,6 +22,11 @@ const CharList = (props) => {
   }, []);
 
   const onRequest = (offset) => {
+    if(!offset) {
+      setCharList([]);
+      setOffset(210);
+    }
+    console.log('onRequest');
     onCharListLoading();
     marvelService
       .getAllCharacters(offset)
@@ -33,12 +38,19 @@ const CharList = (props) => {
     setNewItemLoading(true);
   };
 
+
   const onCharListLoaded = (newCharList) => {
+    console.log('onCharListLoaded');
     let ended = false;
     if (newCharList.length < 9) {
       ended = true;
     }
-    setCharList((charList) => [...charList, ...newCharList]);
+    if (offset !== 210) {
+      setCharList((charList) => [...charList, ...newCharList]);
+    } else {
+      setCharList(newCharList);
+    }
+
     setLoading(false);
     setNewItemLoading(false);
     setOffset((offset) => offset + 9);
