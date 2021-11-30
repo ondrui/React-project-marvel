@@ -3,75 +3,49 @@ import PropTypes from 'prop-types';
 
 import Spinner from '../spinner/Spinner';
 import ErrorMessage from '../errorMessage/ErrorMessage';
-import MarvelService from '../../services/MarvelService';
+import useMarvelService from '../../services/MarvelService';
 
 import './charList.scss';
 
 const CharList = (props) => {
   const [charList, setCharList] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(false);
   const [newItemLoading, setNewItemLoading] = useState(false);
   const [offset, setOffset] = useState(210);
   const [charEnded, setCharEnded] = useState(false);
 
-  const marvelService = new MarvelService();
+  const {loading, error, getAllCharacters} = useMarvelService();
 
   useEffect(() => {
-    onRequest();
+    onRequest(offset, true);
   }, []);
 
-  const onRequest = (offset) => {
-    if(!offset) {
-      setCharList([]);
-      setOffset(210);
-    }
-    console.log('onRequest');
-    onCharListLoading();
-    marvelService
-      .getAllCharacters(offset)
-      .then(onCharListLoaded)
-      .catch(onError);
-  };
+  const onRequest = (offset, initial) => {
+    initial ? setNewItemLoading(false) : setNewItemLoading(true);
 
-  const onCharListLoading = () => {
-    setNewItemLoading(true);
+    getAllCharacters(offset)
+      .then(onCharListLoaded);
   };
-
 
   const onCharListLoaded = (newCharList) => {
-    console.log('onCharListLoaded');
     let ended = false;
     if (newCharList.length < 9) {
       ended = true;
     }
-    if (offset !== 210) {
-      setCharList((charList) => [...charList, ...newCharList]);
-    } else {
-      setCharList(newCharList);
-    }
-
-    setLoading(false);
+    setCharList((charList) => [...charList, ...newCharList]);
     setNewItemLoading(false);
     setOffset((offset) => offset + 9);
     setCharEnded(ended);
   };
 
-  const onError = () => {
-    setError(true);
-    setLoading(false);
-  };
-
   const errorMessage = error ? <ErrorMessage /> : null;
-  const spinner = loading ? <Spinner /> : null;
-  const content = !(loading || error) ? (
-    <View charList={charList} props={props} />
-  ) : null;
+  const spinner = loading && !newItemLoading? <Spinner /> : null;
   return (
     <div className='char__list'>
       {errorMessage}
       {spinner}
-      <ul className='char__grid'>{content}</ul>
+      <ul className='char__grid'>
+        <View charList={charList} props={props} />
+      </ul>
       <button
         className='button button__main button__long'
         onClick={() => onRequest(offset)}
@@ -86,7 +60,6 @@ const CharList = (props) => {
 
 const View = ({ charList, props }) => {
   return charList.map(({ name, thumbnail, id }) => {
-
     const active = props.charId === id;
     const clazz = active ? 'char__item char__item_selected' : 'char__item ';
     return (

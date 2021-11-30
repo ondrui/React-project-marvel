@@ -4,8 +4,9 @@
 
 * app use the Marvel Comics API is a RESTful service. All representations are encoded as JSON objects.
 * transform data from api call in the format expected by app
-* used Error Boundaries
+* using Error Boundaries
 * Typechecking With PropTypes
-* used React Top-Level API
+* using React Top-Level API
 * Optimization Techniques for React Apps
 * React Composition pattern
+* Hooks & custom hook
