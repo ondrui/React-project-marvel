@@ -14,6 +14,21 @@ const useMarvelService = () => {
     return res.data.results.map(_transformCharacter);
   };
 
+  // Вариант модификации готового метода для поиска по имени.
+    // Вызывать его можно вот так: getAllCharacters(null, name)
+
+    // const getAllCharacters = async (offset = _baseOffset, name = '') => {
+    //     const res = await request(`${_apiBase}characters?limit=9&offset=${offset}${name ? `&name=${name}` : '' }&${_apiKey}`);
+    //     return res.data.results.map(_transformCharacter);
+    // }
+
+    // Или можно создать отдельный метод для поиска по имени
+
+    const getCharacterByName = async (name) => {
+      const res = await request(`${_apiBase}characters?name=${name}&${_apiKey}`);
+      return res.data.results.map(_transformCharacter);
+  }
+
   const getCharacter = async (id) => {
     const res = await request(`${_apiBase}characters/${id}?${_apiKey}`);
     return _transformCharacter(res.data.results[0]);
@@ -57,7 +72,7 @@ const useMarvelService = () => {
     }
   }
 
-  return { loading, error, clearError, getAllCharacters, getCharacter, getAllComics, getComic };
+  return { loading, error, clearError, getAllCharacters, getCharacterByName, getCharacter, getAllComics, getComic };
 };
 
 export default useMarvelService;

@@ -8,5 +8,7 @@
 * Typechecking With PropTypes
 * using React Top-Level API
 * Optimization Techniques for React Apps
+* Lazy-loading components
 * React Composition pattern
 * Hooks & custom hook
+* Routing

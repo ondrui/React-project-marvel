@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
+import { CSSTransition, TransitionGroup } from 'react-transition-group';
 
 import Spinner from '../spinner/Spinner';
 import ErrorMessage from '../errorMessage/ErrorMessage';
@@ -13,7 +14,7 @@ const CharList = (props) => {
   const [offset, setOffset] = useState(210);
   const [charEnded, setCharEnded] = useState(false);
 
-  const {loading, error, getAllCharacters} = useMarvelService();
+  const { loading, error, getAllCharacters } = useMarvelService();
 
   useEffect(() => {
     onRequest(offset, true);
@@ -22,8 +23,7 @@ const CharList = (props) => {
   const onRequest = (offset, initial) => {
     initial ? setNewItemLoading(false) : setNewItemLoading(true);
 
-    getAllCharacters(offset)
-      .then(onCharListLoaded);
+    getAllCharacters(offset).then(onCharListLoaded);
   };
 
   const onCharListLoaded = (newCharList) => {
@@ -38,13 +38,17 @@ const CharList = (props) => {
   };
 
   const errorMessage = error ? <ErrorMessage /> : null;
-  const spinner = loading && !newItemLoading? <Spinner /> : null;
+  const spinner = loading && !newItemLoading ? <Spinner /> : null;
+
   return (
+
     <div className='char__list'>
       {errorMessage}
       {spinner}
       <ul className='char__grid'>
-        <View charList={charList} props={props} />
+
+          <View charList={charList} props={props} />
+
       </ul>
       <button
         className='button button__main button__long'
@@ -59,30 +63,35 @@ const CharList = (props) => {
 };
 
 const View = ({ charList, props }) => {
-  return charList.map(({ name, thumbnail, id }) => {
+  return (
+    <TransitionGroup component={null}>{
+    charList.map(({ name, thumbnail, id }) => {
     const active = props.charId === id;
     const clazz = active ? 'char__item char__item_selected' : 'char__item ';
     return (
-      <li
-        tabIndex={0}
-        key={id}
-        onFocus={() => props.onCharSelected(id)}
-        className={clazz}
-      >
-        <img
-          src={thumbnail}
-          //style={imgStyle}
-          style={
-            thumbnail.indexOf('not_available') !== -1
-              ? { objectFit: 'fill' }
-              : { objectFit: 'cover' }
-          }
-          alt={name}
-        />
-        <div className='char__name'>{name}</div>
-      </li>
+      <CSSTransition key={id}  timeout={1000} classNames='char__item'>
+        <li
+          tabIndex={0}
+          onFocus={() => props.onCharSelected(id)}
+          className={clazz}
+        >
+          <img
+            src={thumbnail}
+            //style={imgStyle}
+            style={
+              thumbnail.indexOf('not_available') !== -1
+                ? { objectFit: 'fill' }
+                : { objectFit: 'cover' }
+            }
+            alt={name}
+          />
+          <div className='char__name'>{name}</div>
+        </li>
+      </CSSTransition>
     );
-  });
+  })}
+  </TransitionGroup>
+  );
 };
 
 CharList.propTypes = {
